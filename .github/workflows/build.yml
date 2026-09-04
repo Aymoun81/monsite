@@ -22,7 +22,7 @@ jobs:
           echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
           echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
       - name: Generate missing platform folders (android/web) 
-        run: flutter create --platforms=android,web.
+        run: flutter create --platforms=android,web --org com.example .
       - name: Install dependencies
         run: flutter pub get
 
