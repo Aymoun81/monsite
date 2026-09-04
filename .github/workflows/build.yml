@@ -23,6 +23,9 @@ jobs:
           echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
       - name: Generate missing platform folders (android/web) 
         run: flutter create --platforms=android,web --org com.example .
+
+      - name: Remove default generated widget test 
+        run: rm -f test/widget_test.dart
       - name: Install dependencies
         run: flutter pub get
 
