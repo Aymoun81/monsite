@@ -25,6 +25,9 @@ jobs:
 
       - name: Remove default generated widget test 
         run: rm -f test/widget_test.dart
+
+      - name: Ensure INTERNET permission in AndroidManifest 
+        run: | if ! grep -q "android.permission.INTERNET" android/app/src/main/AndroidManifest.xml; then sed -i 's/<manifest xmlns:android="http:\/\/schemas.android.com\/apk\/res\/android">/<manifest xmlns:android="http:\/\/schemas.android.com\/apk\/res\/android">\n <uses-permission android:name="android.permission.INTERNET" \/>/' android/app/src/main/AndroidManifest.xml fi
       - name: Install dependencies
         run: flutter pub get
 
