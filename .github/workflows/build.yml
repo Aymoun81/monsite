@@ -40,10 +40,16 @@ jobs:
         run: flutter test
 
       - name: Build APK (release)
-        run: flutter build apk --release --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          URL=$(printf '%s' "${{ secrets.SUPABASE_URL }}" | tr -d '\n\r')
+          KEY=$(printf '%s' "${{ secrets.SUPABASE_ANON_KEY }}" | tr -d '\n\r')
+          flutter build apk --release --dart-define=SUPABASE_URL="$URL" --dart-define=SUPABASE_ANON_KEY="$KEY"
 
       - name: Build Web (release)
-        run: flutter build web --release --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          URL=$(printf '%s' "${{ secrets.SUPABASE_URL }}" | tr -d '\n\r')
+          KEY=$(printf '%s' "${{ secrets.SUPABASE_ANON_KEY }}" | tr -d '\n\r')
+          flutter build web --release --dart-define=SUPABASE_URL="$URL" --dart-define=SUPABASE_ANON_KEY="$KEY"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
